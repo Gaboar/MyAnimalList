@@ -5,10 +5,11 @@
 }
 
 header {
-	background: url("img/img.png");
+	background: url("img/fox.jpg");
 	background-size: cover;
 	background-position: 50%;
 	height: 300px;
+
 }
 header h1 {
 	background: #ffffff;
@@ -105,6 +106,7 @@ td > div > div {
 	padding: 1.5em 1em;
 	display: inline-block;
 	background: #eaf7ff;
+	width:120px;
 }
 
 #login,
