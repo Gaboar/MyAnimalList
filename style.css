@@ -41,11 +41,20 @@ nav li {
 	list-style-type: none;
 	display: inline-block;
 	text-align: center;
+	transition: background-color 0.5s ease;
 }
 nav a {
 	color: #ffffff;
 	display: block;
 	padding: 1em 4vw;
+	transition: color 0.5s ease;
+}
+
+nav li:hover {
+	background-color: #9f9f9f;
+}
+nav a:hover {
+	color:#1e1e1e;
 }
 
 
@@ -69,6 +78,10 @@ tr > * {
 }
 table {
 	width: 100%;
+}
+table img {
+	width: 80px;
+	height: 80px;
 }
 th {
 	padding: 0.3em;
@@ -106,6 +119,10 @@ td > div > div {
 	display: inline-block;
 	background: #eaf7ff;
 	width: 120px;
+	transition: transform 0.2s ease;
+}
+#users a:hover {
+	transform: scale(110%, 110%);
 }
 
 /* ---- USER PROFILE + ANIMALS---- */
@@ -118,7 +135,10 @@ td > div > div {
 	margin-left: 5vw;
 	margin-bottom: 1em;
 }
-#info .center h2 {
+#info #profp {
+	margin-bottom: 2vh;
+}
+#info #profp h2 {
 	margin-bottom: 0.8em;
 }
 #list h2 {
@@ -150,6 +170,7 @@ video {
 	height: 500px;
 	transform: translate(-50%);
 	border: 3px solid #1e1e1e;
+	border-radius: 10px;
 	background: url("img/macska/1.png");
 	background-repeat: no-repeat;
 	background-position: center;
@@ -247,9 +268,36 @@ a {
 	color: #000000;
 }
 
-@media only screen and (max-width: 450px) {
+.btn-active {
+	background-color: #9f9f9f;
+}
+.btn-active a {
+	color: #1e1e1e;
+}
+
+@media only screen and (max-width: 1050px) {
+	#images { width: 100%; height:auto; padding-bottom: 100%; }
+	video { width: 100%; }
+}
+
+@media only screen and (max-width: 800px) {
+	#toplist body {overflow-x: hidden; }
+	#toplist nav, nav * { width: 100%; position: relative; }
+	#toplist nav li, nav a { display: block; text-align: center; padding-left: 0; padding-right: 0; }
+	#toplist main { width: 100%; padding: 0; }
+}
+
+@media only screen and (max-width: 600px) {
 	body {overflow-x: hidden; }
 	nav, nav * { width: 100%; position: relative; }
-    nav li { display: block; text-align: center; }
+	nav li, nav a { display: block; text-align: center; padding-left: 0; padding-right: 0; }
 	main { width: 100%; padding: 0; }
+}
+
+@media only screen and (max-width: 500px) {
+	#info p { width: auto; }
+}
+
+@media only screen and (max-width: 370px) {
+	#toplist {font-size: 0.7rem; }
 }
