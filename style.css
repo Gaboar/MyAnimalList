@@ -61,13 +61,12 @@ main > section {
 	padding: 1em;
 }
 
-
+/* ---- TOPLIST TABLE ---- */
 table, 
 tr > * {
 	border: 1px solid #9f9f9f;
 	border-collapse: collapse;
 }
-
 table {
 	width: 100%;
 }
@@ -95,7 +94,7 @@ td > div > div {
 	text-align: left;
 }
 
-
+/* ---- USERS ---- */
 #users {
 	display: flex;
 	flex-flow: wrap;
@@ -106,9 +105,69 @@ td > div > div {
 	padding: 1.5em 1em;
 	display: inline-block;
 	background: #eaf7ff;
-	width:120px;
+	width: 120px;
 }
 
+/* ---- USER PROFILE + ANIMALS---- */
+#info > * {
+	display: inline-block;
+	vertical-align: top;
+}
+#info #stat {
+	position: relative;
+	margin-left: 5vw;
+	margin-bottom: 1em;
+}
+#info .center h2 {
+	margin-bottom: 0.8em;
+}
+#list h2 {
+	margin-bottom: 0.8em;
+}
+#info p {
+	width: 16vw;
+}
+#list > div {
+	border: 3px solid #9f9f9f;
+	height: 500px;
+	overflow-y: scroll;
+}
+#desc * {
+	padding-bottom: 1em;
+}
+#media h2 {
+	padding: 2em 0 1em 0;
+}
+video {
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+}
+#images {
+	position: relative;
+	left: 50%;
+	width: 500px;
+	height: 500px;
+	transform: translate(-50%);
+	border: 3px solid #1e1e1e;
+	background: url("img/macska/1.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	animation-duration: 10s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-name: slide;
+}
+@keyframes slide {
+	0% { background-image: url("img/macska/1.png"); }
+	25% { background-image: url("img/macska/2.png"); }
+	50% { background-image: url("img/macska/3.png"); }
+	100% { background-image: url("img/macska/4.png"); }
+}
+
+
+/* ---- LOGIN FORM ---- */
 #login,
 #register {
 	position: relative;
@@ -159,7 +218,6 @@ form > div {
 	0% { transform: translate(-50%); }
 	100% { transform: translate(-238%); }
 }
-
 @keyframes reg-reg {
 	0% { transform: translate(-50%); }
 	100% { transform: translate(-238%); }
@@ -172,15 +230,26 @@ form > div {
 	text-align: center;
 }
 
-.padding * {
-	padding: 1em;
+.padding > * {
+	padding: 1vh;
 }
 
 .hidden {
 	display: none;
 }
 
+hr {
+	margin: 2vh 0;
+}
+
 a {
 	text-decoration: none;
 	color: #000000;
+}
+
+@media only screen and (max-width: 450px) {
+	body {overflow-x: hidden; }
+	nav, nav * { width: 100%; position: relative; }
+    nav li { display: block; text-align: center; }
+	main { width: 100%; padding: 0; }
 }

@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
-	<link rel="shortcut icon" href="img/img.png" type="image/x-icon">
+	<link rel="shortcut icon" href="img/mal.png" type="image/x-icon">
 	<title>MyAnimalList - Profile</title>
 </head>
 <body>
@@ -20,12 +20,139 @@
 		</ul>
 	</nav>
 	<main>
-		<img src="img/img.png" alt="profilkép" width="150" height="150">
-		<div>
-			<h2>Statisztika</h2>
-			Értékelések: {e_db}
-			
-		</div>
+		<section id="info">
+			<div class="center">
+				<h2>Kritikuscsavo123 profilja</h2>
+				<img src="img/users/kritikuscsavo123.png" alt="profilkép" width="250" height="250">
+			</div>
+			<div id="stat">
+				<h2>Bemutatkozás</h2>
+				<br>
+				<p>Minden állat megfelelő értékelést kap tőlem. Én vagyok a legnagyobb király és a nők is oda vannak értem.</p>
+				<h2 style="margin-top: 2em;">Statisztika</h2>
+				<br>
+				<p>Értékelések: {e_db}</p>
+				<br>
+				<p>Átlagos pontszám: {m_sc}</p>
+				<br>
+				<p>Kedvenc állat: {f_an}</p>
+			</div>
+		</section>
+		<hr>
+		<section id="list">
+			<h2>Értékelések</h2>
+			<div>
+				<table>
+					<tr>
+						<th>Title</th>
+						<th class="s">Score</th>
+						<th class="s">Action</th>
+					</tr>
+					<tr>
+						<td class="info">
+							<a href="animal.html"><img src="img/macska/1.png" alt="macska" width="80" height="80"></a>
+							<div>
+								<h3><a href="animal.html">Macska (Felis silvestris catus)</a></h3>
+								<div>
+									Háziállat
+									<br>
+									Ragadozó
+									<br>
+									5723 értékelés
+								</div>
+							</div>
+						</td>
+						<td>1</td>
+						<td>edit</td>
+					</tr>
+					<tr>
+						<td class="info">
+							<a href="animal.html"><img src="img/kutya/1.png" alt="kutya" width="80" height="80"></a>
+							<div>
+								<h3><a href="animal.html">Kutya (Canis lupus familiaris)</a></h3>
+								<div>
+									Háziállat
+									<br>
+									Ragadozó
+									<br>
+									6513 értékelés
+								</div>
+							</div>
+						</td>
+						<td>1</td>
+						<td>edit</td>
+					</tr>
+					<tr>
+						<td class="info">
+							<a href="animal.html"><img src="img/szarvasmarha/1.png" alt="szarvasmarha" width="80" height="80"></a>
+							<div>
+								<h3><a href="animal.html">Szarvasmarha (Bos taurus taurus)</a></h3>
+								<div>
+									Háziállat
+									<br>
+									Hövényevő
+									<br>
+									3923 értékelés
+								</div>
+							</div>
+						</td>
+						<td>1</td>
+						<td>edit</td>
+					</tr>
+					<tr>
+						<td class="info">
+							<a href="animal.html"><img src="img/macska/1.png" alt="macska" width="80" height="80"></a>
+							<div>
+								<h3><a href="animal.html">Macska (Felis silvestris catus)</a></h3>
+								<div>
+									Háziállat
+									<br>
+									Ragadozó
+									<br>
+									5723 értékelés
+								</div>
+							</div>
+						</td>
+						<td>2</td>
+						<td>edit</td>
+					</tr>
+					<tr>
+						<td class="info">
+							<a href="animal.html"><img src="img/kutya/1.png" alt="kutya" width="80" height="80"></a>
+							<div>
+								<h3><a href="animal.html">Kutya (Canis lupus familiaris)</a></h3>
+								<div>
+									Háziállat
+									<br>
+									Ragadozó
+									<br>
+									6513 értékelés
+								</div>
+							</div>
+						</td>
+						<td>1</td>
+						<td>edit</td>
+					</tr>
+					<tr>
+						<td class="info">
+							<a href="animal.html"><img src="img/szarvasmarha/1.png" alt="szarvasmarha" width="80" height="80"></a>
+							<div>
+								<h3><a href="animal.html">Szarvasmarha (Bos taurus taurus)</a></h3>
+								<div>
+									Háziállat
+									<br>
+									Hövényevő
+									<br>
+									3923 értékelés
+								</div>
+							</div>
+						</td>
+						<td>1</td>
+						<td>edit</td>
+					</tr>
+				</table>
+			</div>
+		</section>
 	</main>
 	<footer>
 
