@@ -15,9 +15,9 @@
 	</header>
 	<nav>
 		<ul>
-			<li><a href="toplist.html">Ranglista</a></li>
-			<li><a href="users.html">Felhasználók</a></li>
-			<li class="btn-active"><a href="login.html">Bejelentkezés</a></li>
+			<li><a href="toplist.html">Ranglista</a>
+			</li><li><a href="users.html">Felhasználók</a>
+			</li><li class="btn-active"><a href="login.html">Bejelentkezés</a></li>
 		</ul>
 	</nav>
 	<main style="display: flex; flex-flow: row; gap: 50%; overflow: hidden;">
@@ -29,21 +29,21 @@
 				<input type="submit" name="login-btn" value="Bejelentkezés">
 				<button type="reset" onclick="reg_btn_click()">Regisztráció</button>
 			</form>
-			<hr width="500px" style="visibility: hidden;">
+			<hr style="visibility: hidden;">
 		</section>
 		<section id="register">
 			<h2 class="formtitle">Regisztráció</h2>
 			<form action="asd.html" method="POST" autocomplete="off">
-				<label for="uname" class="required">Felhasználónév:</label>
+				<label for="reg_uname" class="required">Felhasználónév:</label>
 				<input type="text" name="username" id="reg_uname" required>
-				<label for="pswd" class="required">Jelszó:</label>
+				<label for="reg_pswd" class="required">Jelszó:</label>
 				<input type="password" name="password" id="reg_pswd" required>
-				<label for="pswd-check" class="required">Jelszó ismét:</label>
+				<label for="reg_pswd-check" class="required">Jelszó ismét:</label>
 				<input type="password" name="password-check" id="reg_pswd-check" required>
 				<label for="email">Email cím:</label>
 				<input type="email" name="email" id="email">
 				<label for="dob">Születésnap:</label>
-				<input type="date" mane="date-of-bith" id="dob">
+				<input type="date" name="date-of-bith" id="dob">
 				<div>
 					Nem:
 					<label><input type="radio" name="gender" value="male" checked> Férfi</label>
@@ -58,7 +58,7 @@
 				<input type="reset" name="reset" value="Visszaállítás">
 				<input type="submit" name="signup" value="Regisztráció">
 			</form>
-			<hr width="500px" style="visibility: hidden;">
+			<hr style="visibility: hidden;">
 		</section>
 	</main>
 	<footer>
