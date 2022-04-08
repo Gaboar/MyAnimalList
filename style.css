@@ -58,6 +58,7 @@ nav a:hover {
 
 
 main {
+	min-height: 80vh;
 	width: 50%;
 	position: relative;
 	box-shadow: 0 0 3vw #9f9f9f;
@@ -67,6 +68,25 @@ main {
 }
 main > section {
 	padding: 1em;
+}
+
+footer {
+	display: block;
+	box-sizing: border-box;
+	z-index: 1000;
+	text-align: center;
+	color: #ffffff;
+	width: 100%;
+	padding: 1.2vh;
+	background: #000000;
+	transform: translate(0);
+}
+footer * {
+	margin: 0 10vw;
+	display: inline-block;
+}
+footer a {
+	color: #ffffff
 }
 
 
