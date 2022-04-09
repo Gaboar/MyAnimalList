@@ -9,6 +9,7 @@ $email="";
 $date="";
 $gender="";
 $intro="";
+$pfp="";
 
 $password="";
 
@@ -28,6 +29,8 @@ if(isset($_POST['signup'])) {
     $gender = $_POST['gender'];
 
     $intro = $_POST['introduction'];
+    //$pfp = $_FILES['profile-picture']['name'];
+
     //feltőtve
 
     //ellenőrzés
@@ -76,15 +79,19 @@ if(isset($_POST['signup'])) {
     }
     else $gender = false;
 
+
+    
+
     //ellenőrzés vége
 
     if(count($errors) == 0) {
         $password = hash('sha256', $pass);
 
-        $q = "INSERT INTO users (username, password, email, szulido, nem, bemutatkozas)
-        VALUES ('$username', '$password', '$email', '$date', '$gender', '$intro')";
+        $q = "INSERT INTO users (username, password, email, szulido, nem, bemutatkozas, profilkep)
+        VALUES ('$username', '$password', '$email', '$date', '$gender', '$intro', '$pfp')";
     
         mysqli_query($db, $q);
+
 
         //echo $password . "<br>";
         //echo $date;

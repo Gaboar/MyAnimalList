@@ -2,6 +2,12 @@
 
 session_start();
 
+$db = mysqli_connect('localhost', 'root', '', 'myanimallist');
+
+if(isset($_SESSION['username'])) {
+	$currentUser = $_SESSION['username'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +29,7 @@ session_start();
 	<main>
 		<section id="popular" class="padding">
 			<h2>Népszerű</h2>
-			<p>A hónap legnépszerűbb állata, amit a felhasználók többsége nagyon szeret, nem lett más, mint a <strong style="color:#1e1e1e">macska</strong>.
+			<p>A legnépszerűbb állat, amit a felhasználók többsége nagyon szeret, nem lett más, mint a <strong style="color:#1e1e1e">macska</strong>.
 			</p>
 			<table>
 				<tr>
@@ -32,24 +38,39 @@ session_start();
 					<th class="s">Értékelés</th>
 					<th class="s">Saját értékelés</th>
 				</tr>
-				<tr>
-					<td class="rank">1</td>
-					<td class="info">
-						<a href="animal.php"><img src="img/macska/1.png" alt="macska"></a>
-						<div>
-							<h3><a href="animal.php">Macska (Felis silvestris catus)</a></h3>
-							<div>
-								Háziállat
-								<br>
-								Ragadozó
-								<br>
-								5723 értékelés
-							</div>
-						</div>
-					</td>
-					<td>9.14</td>
-					<td>-</td>
-				</tr>
+
+				<?php
+
+				$fetch = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM allatok ORDER BY ertekeles LIMIT 1"));
+				
+				echo "<tr>";
+				echo "<td class='rank'>" . 1 . "</td>";
+				echo "<td class='info'>";
+				echo "<a href='animal.php?nev=" . $fetch['alias'] ."'><img src='img/".$fetch['alias']."/1.png' alt='". $fetch['alias'] . "'></a>";
+				echo "<div style='margin-left: 0.5em'>";
+				echo "<h3><a href='animal.php?nev=" . $fetch['alias'] . "'>" . $fetch['name'] . "</a></h3>";
+				echo "<div>";
+				echo $fetch['tipus'];
+				echo "<br>";
+				echo $fetch['ertekelesdb'] . " értékelés";
+				echo "</div>";
+				echo "</div>";
+				echo "</td>";
+				echo "<td>" . $fetch['ertekeles'] . "</td>";
+
+				if(isset($_SESSION['username'])) { 
+					$ertekelt=mysqli_fetch_assoc(mysqli_query($db, "SELECT ertekeles FROM ertekeles WHERE username='$currentUser' AND allatid=" . $fetch['id']));
+				}
+
+				echo "<td>";
+				if(isset($_SESSION['username']) && $ertekelt) { 
+					echo $ertekelt['ertekeles'] . "</td>";
+				 } 
+				else echo "- </td>";
+				echo "</tr>";
+				
+				
+				?>
 			</table>
 		</section>
 		<hr>

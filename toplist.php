@@ -2,6 +2,18 @@
 
 session_start();
 
+$db = mysqli_connect('localhost', 'root', '', 'myanimallist');
+$user="";
+
+$fetch = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM allatok ORDER BY ertekeles DESC"));
+$count = mysqli_num_rows(mysqli_query($db, "SELECT * FROM allatok ORDER BY ertekeles DESC"));
+
+if(isset($_SESSION['username'])) {
+	$currentUser = $_SESSION['username'];
+	$user = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM users WHERE username = '$currentUser'"));
+
+}	
+
 ?>
 
 <!DOCTYPE html>
@@ -25,122 +37,43 @@ session_start();
 				<th>Név</th>
 				<th class="s">Értékelés</th>
 				<th class="s">Saját értékelés</th>
-				<th class="s">Művelet</th>
 			</tr>
-			<tr>
-				<td class="rank">1</td>
-				<td class="info">
-					<a href="animal.php"><img src="img/macska/1.png" alt="macska"></a>
-					<div>
-						<h3><a href="animal.php">Macska (Felis silvestris catus)</a></h3>
-						<div>
-							Háziállat
-							<br>
-							Ragadozó
-							<br>
-							5723 értékelés
-						</div>
-					</div>
-				</td>
-				<td>9.14</td>
-				<td>-</td>
-				<td>szerkesztés</td>
-			</tr>
-			<tr>
-				<td class="rank">2</td>
-				<td class="info">
-					<a href="animal.php"><img src="img/kutya/1.png" alt="kutya"></a>
-					<div>
-						<h3><a href="animal.php">Kutya (Canis lupus familiaris)</a></h3>
-						<div>
-							Háziállat
-							<br>
-							Ragadozó
-							<br>
-							6513 értékelés
-						</div>
-					</div>
-				</td>
-				<td>8.47</td>
-				<td>-</td>
-				<td>szerkesztés</td>
-			</tr>
-			<tr>
-				<td class="rank">3</td>
-				<td class="info">
-					<a href="animal.php"><img src="img/szarvasmarha/1.png" alt="szarvasmarha"></a>
-					<div>
-						<h3><a href="animal.php">Szarvasmarha (Bos taurus taurus)</a></h3>
-						<div>
-							Háziállat
-							<br>
-							Hövényevő
-							<br>
-							3923 értékelés
-						</div>
-					</div>
-				</td>
-				<td>6.21</td>
-				<td>-</td>
-				<td>szerkesztés</td>
-			</tr>
-			<tr>
-				<td class="rank">4</td>
-				<td class="info">
-					<a href="animal.php"><img src="img/filler.png" alt="macska"></a>
-					<div>
-						<h3><a href="animal.php">filler</a></h3>
-						<div>
-							filler informacio
-							<br>
-							unknown
-							<br>
-							98xy értékelés
-						</div>
-					</div>
-				</td>
-				<td>x.y1</td>
-				<td>-</td>
-				<td>szerkesztés</td>
-			</tr>
-			<tr>
-				<td class="rank">5</td>
-				<td class="info">
-					<a href="animal.php"><img src="img/filler.png" alt="macska"></a>
-					<div>
-						<h3><a href="animal.php">filler</a></h3>
-						<div>
-							filler informacio
-							<br>
-							unknown
-							<br>
-							98xy értékelés
-						</div>
-					</div>
-				</td>
-				<td>x.y1</td>
-				<td>-</td>
-				<td>szerkesztés</td>
-			</tr>
-			<tr>
-				<td class="rank">6</td>
-				<td class="info">
-					<a href="animal.php"><img src="img/filler.png" alt="macska"></a>
-					<div>
-						<h3><a href="animal.php">filler</a></h3>
-						<div>
-							filler informacio
-							<br>
-							unknown
-							<br>
-							98xy értékelés
-						</div>
-					</div>
-				</td>
-				<td>x.y1</td>
-				<td>-</td>
-				<td>szerkesztés</td>
-			</tr>
+			<?php 
+
+			$ertekelt="";
+			
+			for($i=0; $i<$count; $i++) {
+				echo "<tr>";
+				echo "<td class='rank'>" . $i+1 . "</td>";
+				echo "<td class='info'>";
+				echo "<a href='animal.php?nev=". $fetch['alias'] ."'><img src='img/".$fetch['alias']."/1.png' alt='". $fetch['alias'] . "'></a>";
+				echo "<div style='margin-left: 0.5em'>";
+				echo "<h3><a href='animal.php?nev=" . $fetch['alias'] ."'>" . $fetch['name'] . "</a></h3>";
+				echo "<div>";
+				echo $fetch['tipus'];
+				echo "<br>";
+				echo $fetch['ertekelesdb'] . " értékelés";
+				echo "</div>";
+				echo "</div>";
+				echo "</td>";
+				echo "<td>" . $fetch['ertekeles'] . "</td>";
+
+				if(isset($_SESSION['username'])) { 
+					$ertekelt=mysqli_fetch_assoc(mysqli_query($db, "SELECT ertekeles FROM ertekeles WHERE username='$currentUser' AND allatid=" . $fetch['id']));
+				}
+
+				echo "<td>";
+				if(isset($_SESSION['username']) && $ertekelt) { 
+					echo $ertekelt['ertekeles'] . "</td>";
+				 } 
+				else echo "- </td>";
+
+				echo "</tr>";
+			}
+			
+			
+			?>
+
 		</table>
 	</main>
 

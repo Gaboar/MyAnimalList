@@ -3,8 +3,28 @@
 <?php
 
 if(isset($_SESSION['username'])) {
+
 	header('location: main.php');
+
 }
+	//fajl feltoltes kulon funy :D
+	if(isset($_POST['signup'])) {
+
+		if(count($errors) == 0) {
+			$megengedettFormat = array('jpg', 'png');
+			$kiterjesztes = pathinfo($_FILES['profile-picture']['name'], PATHINFO_EXTENSION);
+	
+			if(in_array($kiterjesztes, $megengedettFormat)) {
+				$feltoltottFajl = 'img/users/' . basename($_POST['username'] . '.' . $kiterjesztes);
+				move_uploaded_file($_FILES['profile-picture']['tmp_name'], $feltoltottFajl);
+				$q = "UPDATE users SET profilkep = '". $_POST['username'] . '.' . $kiterjesztes . "' WHERE username='$username'";
+				mysqli_query($db, $q);
+			}
+			//else majd rájön a felhasználó hogy nincs képe
+		}
+
+		
+	}
 
 
 ?>
@@ -40,12 +60,12 @@ if(isset($_SESSION['username'])) {
 		</section>
 		<section id="register">
 			<h2 class="formtitle">Regisztráció</h2>
-			<form action="login.php" method="POST" autocomplete="off">
+			<form enctype="multipart/form-data" action="login.php" method="POST" autocomplete="off">
 			<?php include('page/errors.php'); ?> <br>
 
 				<label for="reg_uname" class="required">Felhasználónév:</label>
 				<input type="text" name="username" id="reg_uname" required>
-				<label for="reg_pswd" class="required">Jelszó:</label>
+				<label for="reg_pswd" class="required">Jelszó (min. 4 karakter):</label>
 				<input type="password" name="password" id="reg_pswd" required>
 				<label for="reg_pswd-check" class="required">Jelszó ismét:</label>
 				<input type="password" name="password-check" id="reg_pswd-check" required>
@@ -61,7 +81,7 @@ if(isset($_SESSION['username'])) {
 				<label for="intro">Bemutatkozás:</label>
 				<textarea name="introduction" id="intro" maxlength="300" rows="6"></textarea>
 				<div>
-					<label for="pfp">Profilkép:</label>
+					<label for="pfp">Profilkép (kizárólag jpg, png):</label>
 					<input type="file" name="profile-picture" id="pfp">
 				</div>
 				<input type="reset" name="reset" value="Visszaállítás">

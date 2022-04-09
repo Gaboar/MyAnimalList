@@ -28,14 +28,14 @@ $profilkep="";
 
 	<main>
 		<section id="users" class="center">
-			
+
 			<?php 
 			for($i=0; $i<count($users); $i++) {
-				if($users[$i][7] == '') {
+				if($users[$i][8] == '') {
 					$profilkep="default.jpg";
 				}
 				else {
-					$profilkep = $users[$i][7];
+					$profilkep = $users[$i][8];
 				} 
 				echo '<a href="profile.php?user=' . $users[$i][1] . '">';
 					echo '<img src="img/users/' . $profilkep . '" alt="profilkép" width="80" height="80">';

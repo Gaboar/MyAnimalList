@@ -205,6 +205,10 @@ td > div > div {
 	margin-left: 5vw;
 	margin-bottom: 1em;
 }
+#info #stat button {
+	transform: translate(0, -0.2em);
+	cursor: pointer;
+}
 #info #profp {
 	margin-bottom: 2vh;
 }
@@ -228,7 +232,7 @@ td > div > div {
 #media h2 {
 	padding: 2em 0 1em 0;
 }
-video {
+#media video {
 	position: relative;
 	left: 50%;
 	transform: translate(-50%);
@@ -250,13 +254,9 @@ video {
 	animation-direction: alternate;
 	animation-name: slide;
 }
-@keyframes slide {
-	0% { background-image: url("img/macska/1.png"); }
-	25% { background-image: url("img/macska/2.png"); }
-	50% { background-image: url("img/macska/3.png"); }
-	100% { background-image: url("img/macska/4.png"); }
+#stat .i {
+	margin-top: 0.5em;
 }
-
 
 /* ---- LOGIN FORM ---- */
 #login,
@@ -314,7 +314,38 @@ form > div {
 	0% { transform: translate(-50%); }
 	100% { transform: translate(-238%); }
 }
+.pub {
+	display: block;
+}
 
+/* ---- MESSAGES ---- */
+#messages {
+	overflow-y: scroll;
+	height: 65vh;
+}
+.message {
+	position: relative;
+	margin: 2vh 0;
+	background: #dadada;
+	width: calc(50% - 2.6em);
+	padding: 1.3em;
+	overflow-wrap: break-word;
+}
+.time {
+	font-size: 0.8em;
+	color: #505050;
+}
+.this {
+	background: #b0cbff;
+	transform: translate(100%);
+}
+.this .time {
+	text-align: right;
+}
+#send input {
+	padding: 0.7em;
+	width: 100%;
+}
 
 /* ---- UTILS ---- */
 
