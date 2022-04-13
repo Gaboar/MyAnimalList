@@ -26,6 +26,10 @@ if(isset($_POST['signup'])) {
     $email = $_POST['email'];
     $date = $_POST['date-of-birth'];
 
+    if($date > date('Y-m-d')) {
+        $date = "";
+    }
+
     $gender = $_POST['gender'];
 
     $intro = $_POST['introduction'];
@@ -92,6 +96,8 @@ if(isset($_POST['signup'])) {
     
         mysqli_query($db, $q);
 
+        $_SESSION['info'] = "Sikeres regisztráció! Most már bejelentkezhetsz.";
+        header('location: main.php');
 
         //echo $password . "<br>";
         //echo $date;

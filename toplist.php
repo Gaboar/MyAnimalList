@@ -5,8 +5,10 @@ session_start();
 $db = mysqli_connect('localhost', 'root', '', 'myanimallist');
 $user="";
 
-$fetch = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM allatok ORDER BY ertekeles DESC"));
+$fetch = mysqli_fetch_all(mysqli_query($db, "SELECT * FROM allatok ORDER BY ertekeles desc"));
 $count = mysqli_num_rows(mysqli_query($db, "SELECT * FROM allatok ORDER BY ertekeles DESC"));
+
+//print_r($fetch);
 
 if(isset($_SESSION['username'])) {
 	$currentUser = $_SESSION['username'];
@@ -46,20 +48,20 @@ if(isset($_SESSION['username'])) {
 				echo "<tr>";
 				echo "<td class='rank'>" . $i+1 . "</td>";
 				echo "<td class='info'>";
-				echo "<a href='animal.php?nev=". $fetch['alias'] ."'><img src='img/".$fetch['alias']."/1.png' alt='". $fetch['alias'] . "'></a>";
+				echo "<a href='animal.php?nev=". $fetch[$i][2] ."'><img src='img/".$fetch[$i][2]."/1.png' alt='". $fetch[$i][2] . "'></a>";
 				echo "<div style='margin-left: 0.5em'>";
-				echo "<h3><a href='animal.php?nev=" . $fetch['alias'] ."'>" . $fetch['name'] . "</a></h3>";
+				echo "<h3><a href='animal.php?nev=" . $fetch[$i][2] ."'>" . $fetch[$i][1] . "</a></h3>";
 				echo "<div>";
-				echo $fetch['tipus'];
+				echo $fetch[$i][4];
 				echo "<br>";
-				echo $fetch['ertekelesdb'] . " értékelés";
+				echo $fetch[$i][5] . " értékelés";
 				echo "</div>";
 				echo "</div>";
 				echo "</td>";
-				echo "<td>" . $fetch['ertekeles'] . "</td>";
+				echo "<td>" . $fetch[$i][6] . "</td>";
 
 				if(isset($_SESSION['username'])) { 
-					$ertekelt=mysqli_fetch_assoc(mysqli_query($db, "SELECT ertekeles FROM ertekeles WHERE username='$currentUser' AND allatid=" . $fetch['id']));
+					$ertekelt=mysqli_fetch_assoc(mysqli_query($db, "SELECT ertekeles FROM ertekeles WHERE username='$currentUser' AND allatid=" . $fetch[$i][0]));
 				}
 
 				echo "<td>";

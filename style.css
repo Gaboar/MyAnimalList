@@ -96,7 +96,9 @@ footer a {
 #recommended ul {
 	padding: 0;
 	display: block;
-	width: 1600px;
+	overflow: hidden;
+	box-sizing: border-box;
+	width: calc(5 * 200px + 10%);
 	transform: translate(0);
 	animation-duration: 10s;
 	animation-iteration-count: infinite;
@@ -134,10 +136,10 @@ footer a {
 
 @keyframes roll {
 	0% { transform: translate(0); }
-	25% { transform: translate(-10%); }
-	50% { transform: translate(-20%); }
-	75% { transform: translate(-30%); }
-	100% { transform: translate(-40%); }
+	25% { transform: translate(calc(-1 * 200px + 14%)); }
+	50% { transform: translate(calc(-1 * 200px + 12%)); }
+	75% { transform: translate(calc(-1 * 200px + 10%)); }
+	100% { transform: translate(calc(-1 * 200px + 8%)); }
 }
 
 /* ---- TOPLIST TABLE ---- */

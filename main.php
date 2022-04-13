@@ -8,6 +8,7 @@ if(isset($_SESSION['username'])) {
 	$currentUser = $_SESSION['username'];
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +29,9 @@ if(isset($_SESSION['username'])) {
 	
 	<main>
 		<section id="popular" class="padding">
+		<p style="color:red; text-align:center;"><?php include('page/informationbox.php'); ?></p>
 			<h2>Népszerű</h2>
-			<p>A legnépszerűbb állat, amit a felhasználók többsége nagyon szeret, nem lett más, mint a <strong style="color:#1e1e1e">macska</strong>.
+			<p>A legnépszerűbb állat, amit a felhasználók többsége nagyon szeret, nem lett más, mint
 			</p>
 			<table>
 				<tr>
@@ -41,7 +43,7 @@ if(isset($_SESSION['username'])) {
 
 				<?php
 
-				$fetch = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM allatok ORDER BY ertekeles LIMIT 1"));
+				$fetch = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM allatok ORDER BY ertekeles DESC LIMIT 1"));
 				
 				echo "<tr>";
 				echo "<td class='rank'>" . 1 . "</td>";
@@ -75,58 +77,24 @@ if(isset($_SESSION['username'])) {
 		</section>
 		<hr>
 		<section id="recommended" class="padding">
+
+		<?php 
+		
+		$allAllat = mysqli_fetch_all(mysqli_query($db, "SELECT * FROM allatok"));
+		$count = mysqli_num_rows(mysqli_query($db, "SELECT * FROM allatok"));
+		
+		?>
 			<h2>Ajánlott állatok</h2>
 			<ul>
+				<?php for($i = 0; $i < 5; $i++): ?>
 				<li>
-					<a href="animal.php">
+					<a href="animal.php?nev=<?=$allAllat[$i][2]?>">
 						<h4>
-							<span class="haver"><span>Marha</span></span>
+							<span class="haver"><span><?=$allAllat[$i][2]?></span></span>
 						</h4>
-						<img src="img/szarvasmarha/1.png" alt="marha">
+						<img src="img/<?=$allAllat[$i][2]?>/1.png" alt="<?=$allAllat[$i][2]?>">
 					</a>
-				</li><li>
-					<a href="animal.php">
-						<h4>
-							<span class="haver"><span>Macska</span></span>
-						</h4>
-						<img src="img/macska/1.png" alt="macska">
-					</a>
-				</li><li>
-					<a href="animal.php">
-						<h4>
-							<span class="haver"><span>Kutya</span></span>
-						</h4>
-						<img src="img/kutya/1.png" alt="kutya">
-					</a>
-				</li><li>
-					<a href="animal.php">
-						<h4>
-							<span class="haver"><span>filler</span></span>
-						</h4>
-						<img src="img/filler.png" alt="filler">
-					</a>
-				</li><li>
-					<a href="animal.php">
-						<h4>
-							<span class="haver"><span>filler</span></span>
-						</h4>
-						<img src="img/filler.png" alt="filler">
-					</a>
-				</li><li>
-					<a href="animal.php">
-						<h4>
-							<span class="haver"><span>filler</span></span>
-						</h4>
-						<img src="img/filler.png" alt="filler">
-					</a>
-				</li><li>
-					<a href="animal.php">
-						<h4>
-							<span class="haver"><span>filler</span></span>
-						</h4>
-						<img src="img/filler.png" alt="filler">
-					</a>
-				</li>
+				</li> <?php endfor; ?>
 			</ul>
 		</section>
 		<hr>
@@ -135,14 +103,7 @@ if(isset($_SESSION['username'])) {
 			<p>Egyre több felhasználó regisztrál a MyAnimalList weboldalra. Hálánk jeléül kisorsolunk egy Webtervezés
 				gyakorlat jeles osztályzatot. 
 			</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus interdum diam non vestibulum. Fusce
-				eleifend aliquam felis at imperdiet. Donec id euismod ligula. Integer iaculis mi mollis interdum mollis.
-				Maecenas justo augue, consectetur vel scelerisque sit amet, volutpat id nibh. Pellentesque suscipit
-				risus vel velit scelerisque vestibulum. Mauris porta, tellus id consequat ullamcorper, est leo porttitor
-				massa, quis porta ligula tellus sed ante. Nulla elementum euismod elit, eget pellentesque nisi iaculis
-				non. Fusce lacinia efficitur massa, ut fringilla arcu mollis id. Integer rutrum tempor enim quis rutrum.
-				Praesent in eros libero. Ut sed leo eros. Ut ultrices vestibulum sapien interdum tempor. Sed vel
-				venenatis arcu.
+			<p>Elkészült a weboldal beadásra.
 			</p>
 		</section>
 	</main>

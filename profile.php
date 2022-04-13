@@ -2,6 +2,9 @@
 
 session_start();
 
+$user="";
+$currentUser="";
+
 $db = mysqli_connect('localhost', 'root', '', 'myanimallist');
 if(isset($_GET['user'])) {
 	$currentUser=$_GET['user'];

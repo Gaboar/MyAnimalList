@@ -49,7 +49,7 @@ if(isset($_SESSION['username'])) {
 			<h2 class="formtitle">Bejelentkezés</h2>
 
 			<?php include('page/errors.php'); ?> <br> 
-
+			<?php include('page/informationbox.php'); ?>
 			<form action="login.php" method="POST" autocomplete="off">
 				<input type="text" name="username" id="login_uname" placeholder="Felhasználónév" required>
 				<input type="password" name="password" id="login_pswd" placeholder="Jelszó" required>

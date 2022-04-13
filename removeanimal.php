@@ -8,23 +8,43 @@ if(isset($_SESSION['username'])) {
 	$currentUser=$_SESSION['username'];
 
 	$user = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM users WHERE username='$currentUser'"));
-	
-	if(!$user) {
-		header('location: users.php');
-	}
-	
-	if($user['profilkep'] == '') {
-		$profilkep="default.jpg";
+
+	if($user['isadmin']) {
+
+		if(isset($_POST['delete'])) {
+			$pass = $_POST['password'];
+			$alias = $_POST['alias'];
+
+			$pass = hash('sha256', $pass);
+
+
+			if($pass == $user['password']) {
+				$q = "DELETE FROM allatok WHERE alias = '$alias'";
+
+				mysqli_query($db, $q);
+
+				$_SESSION['info'] = "Állat sikeresen törölve!";
+				header('location: main.php');
+			}
+			else {
+				$_SESSION['info'] = "Állat nem került törlésre! Hibás jelszó.";
+				header('location: main.php');
+			}
+		}
+
+
+
+
 	}
 	else {
-		$profilkep = $user['profilkep'];
+		$_SESSION['info'] = "Nincs jogosultságod az oldal meglátogatásához!";
+		header('location: main.php');
 	} 
 	
 }
 else {
 	header('location: login.php');
 }
-
 
 //list todo
 
@@ -48,7 +68,7 @@ else {
 	<main>
 		<section id="adminremove">
 			<h2 class="formtitle">Állat törlése</h2>
-			<form enctype="multipart/form-data" action="asd.html" method="POST" autocomplete="off" style="width: 70%">
+			<form enctype="multipart/form-data" action="removeanimal.php" method="POST" autocomplete="off" style="width: 70%">
 				<label for="alias">Alias:</label>
 				<input type="text" name="alias" id="alias">
 				<label for="del_pswd">Add meg a jelszavad:</label>

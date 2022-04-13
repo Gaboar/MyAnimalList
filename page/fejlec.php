@@ -2,7 +2,7 @@
 $db = mysqli_connect('localhost', 'root', '', 'myanimallist');
 
 if(isset($_SESSION['username'])) {
-	$user = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM users WHERE username='" . $_SESSION['username'] . "'"));
+	$fejlecfetch = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM users WHERE username='" . $_SESSION['username'] . "'"));
 }
 	
 
@@ -15,7 +15,7 @@ if(isset($_SESSION['username'])) {
 	<ul>
 		<li><a href="toplist.php">Ranglista</a>
 		</li><li><a href="users.php">Felhasználók</a>
-		<?php if(isset($_SESSION['username']) && $user['isadmin']) : ?>
+		<?php if(isset($_SESSION['username']) && $fejlecfetch['isadmin']) : ?>
 			</li><li><a href="addanimal.php">Állat hozzáadása</a>
 			</li><li><a href="removeanimal.php">Állat törlése</a>
 		<?php endif ?>	

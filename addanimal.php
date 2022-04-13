@@ -2,6 +2,7 @@
 
 session_start();
 
+$errors = array();
 $db = mysqli_connect('localhost', 'root', '', 'myanimallist');
 
 if(isset($_SESSION['username'])) {
@@ -15,54 +16,77 @@ if(isset($_SESSION['username'])) {
 
 			$nev = $_POST['name'];
 			$alias = $_POST['alias'];
-			$desc = $_POST['desc'];
-
-			$megengedettFormat = array('png');
-
-			$kiterjesztes = pathinfo($_FILES['animal-picture1']['name'], PATHINFO_EXTENSION);
-			if(in_array($kiterjesztes, $megengedettFormat)) {
-				$feltoltottFajl = 'img/' . $alias . '/'. 1 . '.' . $kiterjesztes);
-				move_uploaded_file($_FILES['animal-picture1']['tmp_name'], $feltoltottFajl);
-			}
-
-			$kiterjesztes = pathinfo($_FILES['animal-picture2']['name'], PATHINFO_EXTENSION);
-			if(in_array($kiterjesztes, $megengedettFormat)) {
-				$feltoltottFajl = 'img/' . $alias . '/'. 2 . '.' . $kiterjesztes);
-				move_uploaded_file($_FILES['animal-picture2']['tmp_name'], $feltoltottFajl);
-			}
-
-			$kiterjesztes = pathinfo($_FILES['animal-picture3']['name'], PATHINFO_EXTENSION);
-			if(in_array($kiterjesztes, $megengedettFormat)) {
-				$feltoltottFajl = 'img/' . $alias . '/'. 3 . '.' . $kiterjesztes);
-				move_uploaded_file($_FILES['animal-picture3']['tmp_name'], $feltoltottFajl);
-			}
-
-			$kiterjesztes = pathinfo($_FILES['animal-picture4']['name'], PATHINFO_EXTENSION);
-			if(in_array($kiterjesztes, $megengedettFormat)) {
-				$feltoltottFajl = 'img/' . $alias . '/'. 4 . '.' . $kiterjesztes);
-				move_uploaded_file($_FILES['animal-picture4']['tmp_name'], $feltoltottFajl);
-			}
+			$desc = $_POST['description'];
+			$type = $_POST['type'];
 
 			
-			//copypaste ezt kell formázni
-			
-			
-	
-			
+			//képek feltöltése
+			for($i=1; $i<=4; $i++) {
+				kepfeltoltes($alias, $i);
+			}
+			videofeltoltes($alias);
 
+			//adatbázis dolgok
+			$q = "INSERT INTO allatok (name, alias, leiras, tipus, ertekelesdb, ertekeles)
+			VALUES ('$nev', '$alias', '$desc', '$type', 0, 0)";
 
+			if(!mysqli_query($db, $q)) {
+				echo mysqli_error($db);
+				$_SESSION['info'] = "Állat nem került feltöltésre! Hiba!";
+				header('location: main.php');
+			}
+			else {
+				$_SESSION['info'] = "Állat sikeresen feltöltve!";
+				header('location: main.php');
+			}
 
 		}
 
 
 	}
+	else {
+		$_SESSION['info'] = "Nincs jogosultságod az oldal meglátogatásához!";
+		header('location: main.php');
+	} 
 	
 }
 else {
 	header('location: login.php');
 }
 
+function kepfeltoltes($alias, $index) {
+	$megengedettFormat = array('png');
+	$kiterjesztes = pathinfo($_FILES['animal-picture' . $index]['name'], PATHINFO_EXTENSION);
+	if(in_array($kiterjesztes, $megengedettFormat)) {
+		if(!file_exists('img/' . $alias)) {
+			mkdir('img/' . $alias);
+		}
+		$feltoltottFajl = 'img/' . $alias . '/'. $index . '.' . $kiterjesztes;
+		move_uploaded_file($_FILES['animal-picture' . $index]['tmp_name'], $feltoltottFajl);
+	}
+	else {
+		array_push($errors, "Nem megengedett fájlkiterjesztést használtál!");
+		header('location: addanimal.php');
+		die();
+	}
+}
 
+function videofeltoltes($alias) {
+	$megengedettFormat = array('mp4');
+	$kiterjesztes = pathinfo($_FILES['video']['name'], PATHINFO_EXTENSION);
+	if(in_array($kiterjesztes, $megengedettFormat)) {
+		if(!file_exists('img/' . $alias)) {
+			mkdir('img/' . $alias);
+		}
+		$feltoltottFajl = 'video/' . $alias . '.' . $kiterjesztes;
+		move_uploaded_file($_FILES['video']['tmp_name'], $feltoltottFajl);
+	}
+	else {
+		array_push($errors, "Nem megengedett fájlkiterjesztést használtál!");
+		header('location: addanimal.php');
+		die();
+	}
+}
 
 //list todo
 
@@ -86,7 +110,8 @@ else {
 	<main>
 		<section id="adminadd">
 			<h2 class="formtitle">Állat feltöltése</h2>
-			<form enctype="multipart/form-data" action="asd.html" method="POST" autocomplete="off" style="width: 70%">
+			<?php include('page/errors.php'); ?>
+			<form enctype="multipart/form-data" action="addanimal.php" method="POST" autocomplete="off" style="width: 70%">
 				<label for="name" class="required">Név:</label>
 				<input type="text" name="name" id="name" required>
 				<label for="alias" class="required">Alias:</label>
